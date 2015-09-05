@@ -151,6 +151,16 @@
             (return-from verify-puzzle nil)))
     t))
 
+;;; Playing
+
+(defun poke (space puzzle x y)
+  (check-type space bit)
+  (setf (aref (board puzzle) y x) space))
+
+(defun toggle (puzzle x y)
+  (symbol-macrolet ((space (aref (board puzzle) y x)))
+    (setf space (if (zerop space) 1 0))))
+
 ;;; Samples
 
 (defvar b (make-puzzle '((2 2) (2 2) (2 2) (2 2) (2 2))
@@ -180,14 +190,5 @@
           (for y below (height c))
           (iter (for space in solved-row)
                 (for x below (width c))
-                (setf (aref (board c) y x) space)))))
+                (poke space c x y)))))
 
-;;; Playing
-
-(defun poke (space puzzle x y)
-  (check-type space bit)
-  (setf (aref (board puzzle) y x) space))
-
-(defun toggle (puzzle x y)
-  (symbol-macrolet ((space (aref (board puzzle) y x)))
-    (setf space (if (zerop space) 1 0))))
