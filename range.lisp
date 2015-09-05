@@ -40,4 +40,3 @@ decreasing lists no less than 1 more than END."
 
 ;; #{5} => '(0 1 2 3 4 5)
 ;; #{10 2 2} => '(10 8 6 4)
-;; etc
