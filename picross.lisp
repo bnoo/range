@@ -23,7 +23,6 @@
 (defun concat (&rest strings)
   "Concatenate STRINGS."
   (apply (curry #'concatenate 'string) strings))
-
 
 ;;; Puzzle manipulation
 
@@ -166,4 +165,3 @@
   "If (X, Y) in PUZZLE is 1, set it to 0; if it is 0, set it to 1."
   (symbol-macrolet ((space (aref (board puzzle) y x)))
     (setf space (if (zerop space) 1 0))))
-
