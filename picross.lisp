@@ -161,34 +161,3 @@
   (symbol-macrolet ((space (aref (board puzzle) y x)))
     (setf space (if (zerop space) 1 0))))
 
-;;; Samples
-
-(defvar b (make-puzzle '((2 2) (2 2) (2 2) (2 2) (2 2))
-                       '((5) (5) () (5) (5))))
-
-(defvar c (make-puzzle '((10) (8 1) (7 2) (6 3) (5 4) (1 1 1))
-                       '((6) (5) (6) (5) (6)
-                         (4) (3 1) (2 2) (1 3) (5))))
-
-(defun reset-c ()
-  (setf c (make-puzzle '((10) (8 1) (7 2) (6 3) (5 4) (1 1 1))
-                       '((6) (5) (6) (5) (6)
-                         (4) (3 1) (2 2) (1 3) (5)))))
-
-(defun solve-c ()
-  (let ((solution '((1  1  1  1  1  1)
-                    (1  1  1  1  1  0)
-                    (1  1  1  1  1  1)
-                    (1  1  1  1  1  0)
-                    (1  1  1  1  1  1)
-                    (1  1  1  1  0  0)
-                    (1  1  1  0  1  0)
-                    (1  1  0  1  1  0)
-                    (1  0  1  1  1  0)
-                    (1  1  1  1  1  0))))
-    (iter (for solved-row in solution)
-          (for y below (height c))
-          (iter (for space in solved-row)
-                (for x below (width c))
-                (poke space c x y)))))
-
