@@ -139,14 +139,8 @@
                           (helper 0 (rest line) (rest hint)))))
                    ((= (first line) 1)
                     (helper (1+ current-block) (rest line) hint))
-                   (t (error (concat
-                              (format nil "This should never happen.~%")
-                              (format nil "current-block: ~a~%" current-block)
-                              (format nil "line: ~a~%" line)
-                              (format nil "hint: ~a~%" hint)))))))
-    (format t "Testing line ~a with ~a~%" line hint)
-    (prog1 (helper 0 (coerce line 'list) hint)
-      (format t "Returned: ~a~%"  (helper 0 (coerce line 'list) hint)))))
+                   (t (error "This should never happen.")))))
+    (helper 0 (coerce line 'list) hint)))
 
 (defun verify-puzzle (puzzle)
   (let ((row-hints    (row-hints puzzle))
@@ -186,7 +180,6 @@
           (for y below (height c))
           (iter (for space in solved-row)
                 (for x below (width c))
-                (format t "Setting (~a,~a) to ~a~%" x y space)
                 (setf (aref (board c) y x) space)))))
 
 ;;; Playing
